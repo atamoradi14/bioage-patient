@@ -1,32 +1,82 @@
 <app-unsecured-header></app-unsecured-header>
 <div class="main">
-  <div class="container">
-    <div class="content-parent">
-      <div class="content-inner">
-        <div class="row">
-          <div class="col-lg-8 content-block">
-            <div class="content">
-              <h1 class="title text-center" i18n>BioAge Results Portal</h1>
-              <p i18n>Please, authenticate to view your results</p>
-              <div class="actions">
-                <button
-                  (click)="login()"
-                  class="btn text-uppercase me-3 btn-regular"
-                  i18n
-                >
-                  Sign In
-                </button>
-                <button class="btn text-uppercase btn-regular-outlined" i18n>
-                  Create account
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 image-block">
-            <img src="/assets/img/login-page-banner-img.png" alt="" />
+  <div class="wrapper">
+    <h2>Sign in</h2>
+    <p>Please enter your credentials</p>
+
+    <form [formGroup]="signInFormgroup">
+      <div class="row">
+        <div class="form-group">
+          <label for="username" i18n>Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            formControlName="username"
+            placeholder="Enter user Name"
+            i18n-placeholder
+          />
+
+          <div
+            *ngIf="
+              f['username'].invalid &&
+              (f['username'].dirty || f['username'].touched)
+            "
+            class="error"
+          >
+            Username is required.
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="form-group password">
+          <label for="password" i18n>Password</label>
+          <input
+            type="{{ showNewPassword ? 'text' : 'password' }}"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            placeholder="Enter password"
+            i18n-placeholder
+          />
+          <img
+            (click)="showNewPassword = !showNewPassword"
+            src="/assets/svg/{{ showNewPassword ? 'eye-on' : 'eye-off' }}.svg"
+            alt=""
+          />
+          <div
+            *ngIf="
+              f['password'].invalid &&
+              (f['password'].dirty || f['password'].touched)
+            "
+            class="error"
+          >
+            Password is required.
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="second-section">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckChecked"
+          checked
+        />
+        <label class="form-check-label" for="flexCheckChecked">
+          Remember
+        </label>
+      </div>
+
+      <p class="forgot-password">Forgot password?</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-outline-primary btn-regular-outlined extended">Cancel</button>
+      <button class="btn btn-primary btn-regular extended" (click)="login()">Sign in</button>
     </div>
   </div>
 </div>

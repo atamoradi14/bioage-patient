@@ -1,0 +1,52 @@
+.form-group {
+  margin: 10px 0 !important;
+  label {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  input,
+  select {
+    height: 46px;
+    background-color: transparent !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 3px !important;
+
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25) !important;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948 !important; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442 !important; /* red */
+  border: 1px solid #a94442 !important;
+}
+
+.error {
+  font-size: 12px;
+  color: #a94442;
+}
+
+.form-check-input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.form-check-label {
+  color: #828282;
+}
+

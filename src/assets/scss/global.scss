@@ -1,0 +1,26 @@
+*,
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  color: var(--color-primary);
+  line-height: 26px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font-family);
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: inherit;
+}
