@@ -21,7 +21,7 @@ export class AuthService {
     country: 'US',
   } as UserModel;
   constructor(private router: Router) {
-    const savedUser = localStorage.getItem('user');
+    const savedUser = localStorage.getItem('bioage-patient-user');
     if (savedUser) {
       this.isLogin = true;
       this.loginSub.next(true);
@@ -37,12 +37,12 @@ export class AuthService {
   login() {
     this.isLogin = true;
     this.loginSub.next(true);
-    localStorage.setItem('user', JSON.stringify(this.user));
+    localStorage.setItem('bioage-patient-user', JSON.stringify(this.user));
     this.router.navigate(['/']);
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('bioage-patient-user');
     this.isLogin = false;
     this.loginSub.next(false);
     this.router.navigate(['auth']);
