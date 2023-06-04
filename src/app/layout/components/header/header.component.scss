@@ -29,6 +29,8 @@ nav {
       line-height: 26px;
       font-weight: 500;
 
+      cursor: pointer;
+
       &.active {
         color: var(--color-secondary);
         .line {
@@ -41,8 +43,6 @@ nav {
       }
     }
   }
-
-
 }
 
 .regular-dropdown-menu {
