@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { PatientsComponent } from './patients.component';
 import { SharedModule } from '@shared/shared.module';
 import { PatientsRoutingModule } from './patients-routing.module';
+import { AddPatientComponent } from './add-patient/add-patient.component';
 
 
 
 @NgModule({
   declarations: [
-    PatientsComponent
+    PatientsComponent,
+    AddPatientComponent
   ],
   imports: [
     CommonModule,

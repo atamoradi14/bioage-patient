@@ -1,0 +1,46 @@
+.wrapper {
+  margin-top: 5%;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  h2 {
+    font-size: 28px;
+    line-height: 34px;
+    font-weight: 500;
+  }
+
+  .actions {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    .form-group {
+      margin-right: 5px !important;
+      select.sort {
+        margin-left: 5px;
+        outline: 0;
+        border: 1px solid var(--color-border);
+        min-width: 100px;
+        padding: 5px 5px;
+        background-color: var(--color-body);
+        height: inherit;
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .inner-addon {
+    input {
+      width: 280px;
+      font-size: 14px;
+    }
+  }
+}

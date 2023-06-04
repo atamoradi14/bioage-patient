@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class PatientsComponent {
 
+
+  onSort(type: string){
+    //sortAssessment(this.assessmentResults, type);
+  }
 }

@@ -1,1 +1,80 @@
-<p>patients works!</p>
+<div class="container">
+  <div class="wrapper">
+    <h2>Patients List</h2>
+    <div class="actions">
+      <div class="inner-addon left-addon me-auto">
+        <img src="/assets/svg/search.svg" alt="search" />
+        <input
+          type="search"
+          placeholder="Search by ID or email address..."
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="sort" i18n>Sort:</label>
+        <select
+          class="sort"
+          name="sort"
+          #sortControl
+          id="sort"
+          (change)="onSort(sortControl.value)"
+        >
+          <option value="new" selected i18n>Newest</option>
+          <option value="old" i18n>Oldest</option>
+        </select>
+      </div>
+      <button
+        routerLink="/patients/add"
+        class="btn btn-primary btn-regular icon-btn me-3"
+      >
+        <img class="icon" src="/assets/svg/user-plus.svg" alt="" />
+        New Patient
+      </button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <div class="items-per-page">
+        <span>Items per page</span>
+      </div>
+      <div class="showing-items">
+        <span> 1 - 6 of 6 items</span>
+      </div>
+
+      <div class="pages"><span>1</span> > of 1 pages</div>
+
+      <div class="navigate">
+        <span><</span>
+        <span>></span>
+      </div>
+    </div>
+  </div>
+</div>

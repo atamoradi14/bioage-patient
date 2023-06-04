@@ -1,0 +1,51 @@
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #b1b1b1;
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #b1b1b1;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #b1b1b1;
+  }
+}
+
+/* style icon */
+.inner-addon img {
+  position: absolute;
+  margin: 10px;
+}
+
+/* align icon */
+.left-addon img {
+  left: 0px;
+}
+.right-addon img {
+  right: 0px;
+}
+
+.inner-addon input {
+  width: 340px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+/* add padding  */
+.left-addon input {
+  padding-left: 40px;
+  font-size: 17px;
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+}
+.right-addon input {
+  padding-right: 40px;
+}
