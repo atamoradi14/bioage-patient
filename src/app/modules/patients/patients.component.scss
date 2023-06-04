@@ -36,6 +36,29 @@
   }
 }
 
+table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+  tr {
+    td {
+      height: 68px;
+      vertical-align: middle;
+
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 10px 15px;
+    }
+    td:first-child {
+      border-left: 1px solid var(--color-border);
+      border-radius: 8px 0 0 8px;
+    }
+    td:last-child {
+      border-right: 1px solid var(--color-border);
+      border-radius: 0px 8px 8px 0;
+    }
+  }
+}
+
 @media screen and (max-width: 820px) {
   .inner-addon {
     input {
