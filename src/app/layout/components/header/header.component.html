@@ -1,1 +1,53 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#"
+      ><img src="/assets/img/Toku-Eyes-Bioage-Logo.png"
+    /></a>
+
+    <div class="" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="menu">
+        <li routerLink="/home" [routerLinkActive]="'active'">
+          <img class="icon" src="/assets/svg/home.svg" alt="" /> Home
+          <div class="line"></div>
+        </li>
+        <li routerLink="/patients" [routerLinkActive]="'active'">
+          <img class="icon" src="/assets/svg/users.svg" alt="" /> Patients
+          <div class="line"></div>
+        </li>
+      </ul>
+      <button class="btn btn-primary btn-regular icon-btn me-3">
+        <img class="icon" src="/assets/svg/user-plus.svg" alt="" />
+        New Patient
+      </button>
+      <div class="btn-group" dropdown [insideClick]="false">
+        <div class="icon-user-profile" dropdownToggle>
+          <img class="icon" src="/assets/svg/user.svg" alt="search" />
+        </div>
+        <ul
+          *dropdownMenu
+          class="dropdown-menu regular-dropdown-menu my-profile-dropdown"
+        >
+          <!-- <li routerLink="/my-profile" [routerLinkActive]="'active'" i18n>
+            <img
+              class="icon"
+              style="margin-left: -10px"
+              src="/assets/svg/user-outline.svg"
+              alt="externallink"
+            />
+            My Profile
+          </li> -->
+          <li (click)="logout()">
+            <img
+              class="icon"
+              style="margin-right: 10px"
+              src="/assets/svg/log-out.svg"
+              alt="externallink"
+            />
+            <span class="sign-out" i18n>Sign out</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

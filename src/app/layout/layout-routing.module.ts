@@ -8,7 +8,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         loadChildren: () =>
           import('../modules/home/home.module').then((m) => m.HomeModule),
       },
@@ -18,6 +18,11 @@ const routes: Routes = [
           import('../modules/patients/patients.module').then(
             (m) => m.PatientsModule
           ),
+      },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
       },
     ],
   },
