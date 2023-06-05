@@ -62,17 +62,57 @@
 
     <div class="pagination">
       <div class="items-per-page">
-        <span>Items per page</span>
+        <span>Items per page: {{ pagination.itemsPerPage }}</span>
+        <span class="dropdown" dropdown [dropup]="true" [insideClick]="false">
+          <img dropdownToggle src="/assets/svg/chevron-down.svg" alt="" />
+          <ul *dropdownMenu class="dropdown-menu">
+            <li
+              *ngFor="let perPage of pagination.itemsPerPageArr"
+              (click)="changeItemsPerPage(perPage)"
+            >
+              {{ perPage }}
+            </li>
+          </ul>
+        </span>
       </div>
       <div class="showing-items">
-        <span> 1 - 6 of 6 items</span>
+        <span> 1 - 6 of {{ pagination.totalItems }} items</span>
       </div>
 
-      <div class="pages"><span>1</span> > of 1 pages</div>
+      <div class="pages">
+        <span>{{ pagination.currentPage }}</span>
+        <span class="dropdown" dropdown [dropup]="true" [insideClick]="false">
+          <img dropdownToggle src="/assets/svg/chevron-down.svg" alt="" />
+          <ul *dropdownMenu class="dropdown-menu">
+            <li
+              *ngFor="
+                let page of [].constructor(pagination.totalPages);
+                let i = index
+              "
+              (click)="pageChange(page)"
+            >
+              {{ i + 1 }}
+            </li>
+          </ul>
+        </span>
+
+        of {{ pagination.totalPages }}
+        pages
+      </div>
 
       <div class="navigate">
-        <span><</span>
-        <span>></span>
+        <span
+          ><img
+            (click)="pageChange(pagination.currentPage - 1)"
+            src="/assets/svg/chevron-left.svg"
+            alt=""
+        /></span>
+        <span
+          ><img
+            (click)="pageChange(pagination.currentPage + 1)"
+            src="/assets/svg/chevron-right.svg"
+            alt=""
+        /></span>
       </div>
     </div>
   </div>
