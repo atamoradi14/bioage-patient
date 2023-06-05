@@ -33,15 +33,29 @@
     </div>
     <table class="table">
       <tbody>
-        <tr>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+        <tr *ngFor="let patient of patientList">
+          <td>
+            <img class="icon" src="/assets/svg/user-black.svg" alt="" />
+            {{ patient.id }}
+          </td>
+          <td>
+            <img class="icon" src="/assets/svg/mail.svg" alt="" />
+            {{ patient.email }}
+          </td>
+          <td><span class="assessment">Run Assessment</span></td>
+          <td>
+            <span dropdown [insideClick]="true" placement="bottom left">
+              <img
+                dropdownToggle
+                class="icon"
+                src="/assets/svg/more-vertical.svg"
+                alt=""
+              />
+              <ul *dropdownMenu class="dropdown-menu dropdown-menu-left">
+                <li>Remove</li>
+              </ul>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

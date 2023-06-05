@@ -47,6 +47,32 @@ table {
       border-top: 1px solid var(--color-border);
       border-bottom: 1px solid var(--color-border);
       padding: 10px 15px;
+
+      font-family: var(--heading-font-family);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 27px;
+
+      img {
+        margin-right: 5px;
+      }
+
+      .assessment {
+        text-transform: uppercase;
+        color: var(--color-secondary);
+      }
+
+      span {
+        position: relative;
+
+        .dropdown-menu{
+          padding: 10px;
+        }
+
+        .dropdown-menu-left{
+          left: -140px !important;
+        }
+      }
     }
     td:first-child {
       border-left: 1px solid var(--color-border);
