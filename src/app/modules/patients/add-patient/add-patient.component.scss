@@ -1,0 +1,28 @@
+::ng-deep {
+  .mat-stepper-horizontal,
+  .mat-stepper-vertical {
+    background-color: var(--color-body);
+  }
+
+  .mat-vertical-content,
+  .mat-horizontal-stepper-content {
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  .mat-vertical-content {
+    margin-left: 20px;
+  }
+
+  .mat-horizontal-stepper-content {
+    padding: 20px 20px 0 20px;
+  }
+}
+
+.wrapper {
+  margin-top: 5%;
+}
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}

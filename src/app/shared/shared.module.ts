@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
+import { MatStepperModule } from '@angular/material/stepper';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -14,8 +16,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ReactiveFormsModule,
     RouterModule,
     BsDropdownModule.forRoot(),
+
+    MatStepperModule,
   ],
-  exports: [RouterModule, FormsModule, ReactiveFormsModule, BsDropdownModule],
+  exports: [
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule,
+    MatStepperModule,
+  ],
   providers: [AuthGuard],
 })
 export class SharedModule {}
