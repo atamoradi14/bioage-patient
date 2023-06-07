@@ -1,13 +1,16 @@
 <div class="container">
   <div class="wrapper">
-    <h2>New Patient</h2>
+    <h2 class="title">New Patient</h2>
     <mat-stepper [orientation]="deviceOrientation" [linear]="true" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <ng-template matStepLabel>Patient ID</ng-template>
+        <h2 class="title">Patient ID</h2>
         <form action="" [formGroup]="firstFormGroup">
           <div class="row">
             <div class="form-group">
-              <label for="patientId" i18n>Patient ID</label>
+              <label for="patientId" i18n
+                >Patient ID <span class="required">*</span></label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -33,26 +36,151 @@
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
         <ng-template matStepLabel>Patient Details</ng-template>
-        <!-- <form [formGroup]="secondFormGroup">
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-        </mat-form-field>
+        <h2 class="title">Patient Details</h2>
+        <form action="" [formGroup]="secondFormGroup">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="ethnicity" i18n
+                  >Ethnicity <span class="required">*</span>
+                </label>
+                <select
+                  id="ethnicity"
+                  class="form-select"
+                  formControlName="ethnicity"
+                >
+                  <option value="" disabled>Select</option>
+                  <option value="white">White</option>
+                  <option value="black/africanamerican">
+                    Black / African American
+                  </option>
+                  <option value="asian">Asian</option>
+                  <option value="hispanic">Hispanic</option>
+                  <option value="nativehawaiianorpacificislander">
+                    Native Hawaiian or Pacific Islander
+                  </option>
+                  <option value="americanindianoralaskannative">
+                    American Indian or Alaskan Native
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="gender" i18n
+                  >Gender <span class="required">*</span></label
+                >
+                <select
+                  id="gender"
+                  class="form-select"
+                  formControlName="gender"
+                >
+                  <option value="" disabled>Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-      </form> -->
+          <div class="row">
+            <div class="form-group">
+              <label for="email" i18n
+                >Email <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Enter email"
+                i18n-placeholder
+              />
+            </div>
+          </div>
+          <p style="margin-top: 20px">
+            Please, review the options below and select if any applies to you:
+            <span class="required">*</span>
+          </p>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isPragnent"
+              formControlName="isPragnent"
+            />
+            <label for="isPragnent"> I am currently pregnant </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isExperienceHeartAttack"
+              formControlName="isExperienceHeartAttack"
+            />
+            <label for="isExperienceHeartAttack">
+              I have experienced a cardiac event, such as a stroke or heart
+              attack, etc.
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isHasEyeIssue"
+              formControlName="isHasEyeIssue"
+            />
+            <label for="isHasEyeIssue">
+              I do have a persistent visual impairment, congenital eye disease
+              or history of significant ocular trauma in one or both eyes
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isNone"
+              formControlName="isNone"
+            />
+            <label for="isNone"> None of the above </label>
+          </div>
+        </form>
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div class="actions">
+          <button class="btn btn-outline-primary btn-regular-outlined">
+            Cancel
+          </button>
+          <div>
+            <button
+              class="btn btn-outline-primary btn-regular-outlined"
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button class="btn btn-primary btn-regular" matStepperNext>
+              Consent
+            </button>
+          </div>
         </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Consent</ng-template>
         <p>You are now done.</p>
-        <div>
-          <button matStepperPrevious>Back</button>
-          <button (click)="stepper.reset()">Reset</button>
+        <div class="actions">
+          <button class="btn btn-outline-primary btn-regular-outlined">
+            Cancel
+          </button>
+          <div>
+            <button
+              class="btn btn-outline-primary btn-regular-outlined"
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button class="btn btn-primary btn-regular" matStepperNext>
+              Consent
+            </button>
+          </div>
         </div>
       </mat-step>
     </mat-stepper>

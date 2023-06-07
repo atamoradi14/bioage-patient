@@ -11,7 +11,7 @@
     border: 1px solid var(--color-border) !important;
     border-radius: 3px !important;
     outline: 0;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 14px;
   }
 }
@@ -27,8 +27,8 @@
 }
 
 .ng-invalid:not(form) {
-  border-left: 5px solid #a94442 !important; /* red */
-  border: 1px solid #a94442 !important;
+  //border-left: 5px solid #a94442 !important; /* red */
+  border: 1px solid #f30d09 !important;
 }
 
 .error {
@@ -51,3 +51,6 @@
   color: #828282;
 }
 
+span.required {
+  color: red;
+}

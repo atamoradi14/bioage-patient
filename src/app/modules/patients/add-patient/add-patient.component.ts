@@ -1,19 +1,27 @@
 import { StepperOrientation } from '@angular/cdk/stepper';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-add-patient',
   templateUrl: './add-patient.component.html',
   styleUrls: ['./add-patient.component.scss'],
 })
-export class AddPatientComponent {
+export class AddPatientComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({
-    patientId: ['', Validators.required],
+    patientId: ['ID58942', Validators.required],
   });
   secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+    ethnicity: ['', Validators.required],
+    gender: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    isPragnent: [false],
+    isExperienceHeartAttack: [false],
+    isHasEyeIssue: [false],
+    isNone: [false],
   });
+
   isLinear = false;
   deviceOrientation!: StepperOrientation;
   constructor(private _formBuilder: FormBuilder) {
@@ -32,5 +40,23 @@ export class AddPatientComponent {
     }
 
     console.log('orientationChanged');
+  }
+
+  ngOnInit(): void {
+    this.secondFormGroup.controls.isNone.valueChanges.subscribe((isChecked) => {
+      if (!isChecked) return;
+      this.secondFormGroup.controls.isPragnent.setValue(false);
+      this.secondFormGroup.controls.isExperienceHeartAttack.setValue(false);
+      this.secondFormGroup.controls.isHasEyeIssue.setValue(false);
+    });
+
+    merge(
+      this.secondFormGroup.controls.isPragnent.valueChanges,
+      this.secondFormGroup.controls.isExperienceHeartAttack.valueChanges,
+      this.secondFormGroup.controls.isHasEyeIssue.valueChanges
+    ).subscribe((isCheckedAny) => {
+      if (!isCheckedAny) return;
+      this.secondFormGroup.controls.isNone.setValue(false);
+    });
   }
 }
