@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
   //outline: 1px solid black;
 }
 /* You can add global styles to this file, and also import other style files */
@@ -33,11 +33,19 @@
 @import "assets/scss/form-elements.scss";
 @import "assets/scss/input-with-icon.scss";
 
-
-
-body{
+body {
   background-color: var(--color-body);
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+img.brand {
+  width: 200px;
+}

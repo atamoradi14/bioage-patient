@@ -19,6 +19,9 @@
                 placeholder="Enter a patient id"
                 i18n-placeholder
               />
+              <div *ngIf="ffg.patientId.invalid" class="error">
+                Patient Id is required.
+              </div>
             </div>
           </div>
         </form>
@@ -63,6 +66,9 @@
                     American Indian or Alaskan Native
                   </option>
                 </select>
+                <div *ngIf="sfg.ethnicity.invalid" class="error">
+                  Ethnicity is required.
+                </div>
               </div>
             </div>
             <div class="col-lg-6">
@@ -79,6 +85,9 @@
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
+                <div *ngIf="sfg.gender.invalid" class="error">
+                  Gender is required.
+                </div>
               </div>
             </div>
           </div>
@@ -96,6 +105,9 @@
                 placeholder="Enter email"
                 i18n-placeholder
               />
+              <div *ngIf="sfg.email.invalid" class="error">
+                Email is required.
+              </div>
             </div>
           </div>
           <p style="margin-top: 20px">
@@ -144,6 +156,13 @@
             />
             <label for="isNone"> None of the above </label>
           </div>
+
+          <div
+            *ngIf="secondFormGroup.errors?.['checkboxSelectionError']"
+            class="error"
+          >
+            At least one checkbox need to be selected.
+          </div>
         </form>
 
         <div class="actions">
@@ -157,8 +176,11 @@
             >
               Back
             </button>
-            <button class="btn btn-primary btn-regular" matStepperNext>
-              Consent
+            <button
+              class="btn btn-primary btn-regular"
+              (click)="goForward(stepper)"
+            >
+              Continue to Consent
             </button>
           </div>
         </div>

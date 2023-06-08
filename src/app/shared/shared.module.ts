@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 import { MatStepperModule } from '@angular/material/stepper';
 
@@ -16,6 +18,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     ReactiveFormsModule,
     RouterModule,
     BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
 
     MatStepperModule,
   ],
@@ -24,6 +27,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     FormsModule,
     ReactiveFormsModule,
     BsDropdownModule,
+    ModalModule,
     MatStepperModule,
   ],
   providers: [AuthGuard],
