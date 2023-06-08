@@ -5,6 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { PatientsRoutingModule } from './patients-routing.module';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 import { CantContinueModalComponent } from './add-patient/cant-continue-modal/cant-continue-modal.component';
+import { FlowCompleteModalComponent } from './add-patient/flow-complete-modal/flow-complete-modal.component';
 
 
 
@@ -12,7 +13,8 @@ import { CantContinueModalComponent } from './add-patient/cant-continue-modal/ca
   declarations: [
     PatientsComponent,
     AddPatientComponent,
-    CantContinueModalComponent
+    CantContinueModalComponent,
+    FlowCompleteModalComponent
   ],
   imports: [
     CommonModule,

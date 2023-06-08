@@ -1,5 +1,5 @@
 import { StepperOrientation } from '@angular/cdk/stepper';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { atLeastOneCheckboxNeedToBeSelected } from '@shared/validators/custom-validators';
@@ -7,6 +7,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, merge, of } from 'rxjs';
 import { CantContinueModalComponent } from './cant-continue-modal/cant-continue-modal.component';
 import { Router } from '@angular/router';
+import { FlowCompleteModalComponent } from './flow-complete-modal/flow-complete-modal.component';
 
 @Component({
   selector: 'app-add-patient',
@@ -36,18 +37,21 @@ export class AddPatientComponent implements OnInit {
     return this.secondFormGroup.controls;
   }
 
-  thirdFormGroup = this._formBuilder.group({});
+  thirdFormGroup = this._formBuilder.group({
+    optOut: [''],
+    signature: [],
+  });
 
   isLinear = false;
   deviceOrientation!: StepperOrientation;
 
   isSaved = false;
   isCantContinue = false;
+
   constructor(
     private _formBuilder: FormBuilder,
     private modalService: BsModalService,
     private router: Router
-
   ) {
     this.onOrientationChange(null);
   }
@@ -93,6 +97,7 @@ export class AddPatientComponent implements OnInit {
       if (!isCheckedAny) return;
       this.secondFormGroup.controls.isNone.setValue(false);
     });
+
   }
 
   goForward(stepper: MatStepper) {
@@ -110,10 +115,14 @@ export class AddPatientComponent implements OnInit {
     });
   }
 
-  onCancel(){
-    if(this.firstFormGroup.dirty || this.secondFormGroup.dirty || this.thirdFormGroup.dirty){
-      confirm("There is some panding changes");
-    }else{
+  onCancel() {
+    if (
+      this.firstFormGroup.dirty ||
+      this.secondFormGroup.dirty ||
+      this.thirdFormGroup.dirty
+    ) {
+      confirm('There is some panding changes');
+    } else {
       this.router.navigate(['/patients']);
     }
   }
@@ -125,4 +134,12 @@ export class AddPatientComponent implements OnInit {
 
     return of(true);
   }
+
+  submit(){
+    this.bsModalRef = this.modalService.show(FlowCompleteModalComponent, {
+      animated: true,
+      class: 'flow-complete-modal-wrapper',
+    });
+  }
+
 }

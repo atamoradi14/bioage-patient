@@ -31,11 +31,37 @@
     line-height: 34px;
   }
 
-  .form-check{
+  .form-check {
     margin-bottom: 0.75rem !important;
     font-size: 15px;
     font-weight: 400;
     font-family: var(--heading-font-family);
+  }
+
+  .consent-leter {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    max-height: 350px;
+    overflow-y: auto;
+
+    .content {
+      padding: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    }
+    p {
+      font-size: 15px;
+      line-height: 24px;
+      font-family: var(--heading-font-family);
+      font-weight: 400;
+    }
+    .content > p {
+      font-size: 14px;
+      line-height: 22px;
+    }
   }
 }
 .actions {
@@ -43,9 +69,9 @@
   display: flex;
   justify-content: space-between;
 
-  button{
+  button {
     min-width: 115px;
-    &.btn-regular-outlined{
+    &.btn-regular-outlined {
       margin-right: 20px;
     }
   }
