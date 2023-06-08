@@ -4,8 +4,9 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { atLeastOneCheckboxNeedToBeSelected } from '@shared/validators/custom-validators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { merge } from 'rxjs';
+import { Observable, merge, of } from 'rxjs';
 import { CantContinueModalComponent } from './cant-continue-modal/cant-continue-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-patient',
@@ -34,11 +35,19 @@ export class AddPatientComponent implements OnInit {
   get sfg() {
     return this.secondFormGroup.controls;
   }
+
+  thirdFormGroup = this._formBuilder.group({});
+
   isLinear = false;
   deviceOrientation!: StepperOrientation;
+
+  isSaved = false;
+  isCantContinue = false;
   constructor(
     private _formBuilder: FormBuilder,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private router: Router
+
   ) {
     this.onOrientationChange(null);
   }
@@ -94,9 +103,26 @@ export class AddPatientComponent implements OnInit {
     }
 
     //open modal
+    this.isCantContinue = true;
     this.bsModalRef = this.modalService.show(CantContinueModalComponent, {
       animated: true,
       class: 'cant-continue-modal-wrapper',
     });
+  }
+
+  onCancel(){
+    if(this.firstFormGroup.dirty || this.secondFormGroup.dirty || this.thirdFormGroup.dirty){
+      confirm("There is some panding changes");
+    }else{
+      this.router.navigate(['/patients']);
+    }
+  }
+  canDeactivate(): Observable<boolean> {
+    if (!this.isSaved && !this.isCantContinue) {
+      const result = window.confirm('There are unsaved changes! Are you sure?');
+      return of(result);
+    }
+
+    return of(true);
   }
 }
