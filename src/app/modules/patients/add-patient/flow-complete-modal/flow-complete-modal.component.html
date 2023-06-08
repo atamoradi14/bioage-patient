@@ -1,1 +1,16 @@
-<p>flow-complete-modal works!</p>
+<div class="wrapper">
+  <div class="inner">
+    <div class="content">
+      <h2>You're ready for BioAge</h2>
+      <p>Your technician will take you through the next step.</p>
+      <button
+        (click)="onCompleteClick(); bsModalRef.hide()"
+        routerLink="/patients"
+        class="btn btn-outline-primary btn-regular"
+      >
+        Complete
+      </button>
+    </div>
+    <img src="/assets/img/doctor-with-hand.png" alt="" />
+  </div>
+</div>

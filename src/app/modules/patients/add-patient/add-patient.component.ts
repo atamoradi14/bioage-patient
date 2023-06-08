@@ -138,6 +138,8 @@ export class AddPatientComponent implements OnInit {
   submit(){
     this.bsModalRef = this.modalService.show(FlowCompleteModalComponent, {
       animated: true,
+      ignoreBackdropClick: true,
+      keyboard: false,
       class: 'flow-complete-modal-wrapper',
     });
   }

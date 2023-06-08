@@ -1,0 +1,45 @@
+.wrapper {
+  padding: 15px;
+  border-radius: 12px;
+  .inner {
+    padding: 35px 20px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 12px;
+    background: linear-gradient(
+      270deg,
+      rgba(142, 209, 133, 0.15) 0%,
+      rgba(68, 206, 246, 0.15) 100%
+    );
+    border-radius: 12px;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    img{
+      max-width: 260px;
+    }
+  }
+}
+
+::ng-deep {
+  .flow-complete-modal-wrapper {
+    top: 25%;
+    width: 780px !important;
+    max-width: 780px !important;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .flow-complete-modal-wrapper {
+      top: 25%;
+      width: auto !important;
+      max-width: 100% !important;
+    }
+  }
+}
