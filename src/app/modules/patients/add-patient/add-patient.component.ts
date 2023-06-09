@@ -30,7 +30,7 @@ export class AddPatientComponent implements OnInit {
   canvasWidth = 590;
 
   firstFormGroup = this._formBuilder.group({
-    patientId: ['ID58942', Validators.required],
+    patientId: ['', Validators.required],
   });
   get ffg() {
     return this.firstFormGroup.controls;

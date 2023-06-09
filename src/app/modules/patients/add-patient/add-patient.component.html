@@ -2,114 +2,6 @@
   <div class="wrapper">
     <h2 class="title">New Patient</h2>
     <mat-stepper [orientation]="deviceOrientation" [linear]="true" #stepper>
-      <mat-step>
-        <ng-template matStepLabel>Consent</ng-template>
-        <h2 class="title">Consent</h2>
-
-        <div class="consent-leter">
-          <div class="content">
-            <p>Dear Patient:</p>
-
-            <p>
-              Thank you for choosing our practice for your optometry needs. This
-              document contains important information about the optometry test
-              you will be undergoing. We want you to fully understand the
-              process. Please carefully read all information presented and
-              contact us if you have any questions.
-            </p>
-            <p>
-              The purpose of the optometry test is to assess the current
-              functioning and health of your eyes. The eye test may include, but
-              is not limited to, an assessment of your visual acuity, color
-              vision, depth perception, refraction, and physical health. The
-              test may also check for signs of common eye disorders, such as
-              glaucoma, cataracts, and macular degeneration.
-            </p>
-            <p>
-              At the start of the test, you will be asked to complete a
-              questionnaire that provides us with general information about your
-              family medical history, medications, and lifestyle. After the
-              questionnaire is complete, a visual acuity test will be
-              administered. This may involve using an eye chart or hand-held
-              magnifying lens to evaluate your sight at various distances. Next,
-              the eye doctor may check for depth perception, color vision, and
-              eye alignment. If additional testing is required, the doctor may
-              perform refraction and/or retinoscopy to measure the amount of
-              near- and farsightedness.
-            </p>
-
-            <p>
-              In addition, the optometrist may also examine the overall health
-              of the eye, including corneal curvature, pupil dilation, and the
-              presence of any eye disease. Your eye pressure may be tested to
-              check for glaucoma. Finally, the doctor may evaluate your eyes
-              using ophthalmoscopy to check eye structures, such as the retina,
-              optic disk and macula.
-            </p>
-
-            <p>
-              If you have any questions or concerns about the optometry test or
-              any aspect of our practice, please contact us. We look forward to
-              helping you meet all of your optometry needs. Sincerely, Optometry
-              Practice
-            </p>
-          </div>
-        </div>
-        <p>
-          By signing below I acknowledge that I have received the Toku Inc.
-          BioAge Consent Form. I have been given the right to review such
-          consent form prior to signing this acknowledgement. I understand this
-          organization has the right to change this Consent Form from time to
-          time and that I may have to contact the organization to obtain a
-          current copy. I consent to my details being passed to Toku Inc. so
-          that the BioAge assessment can be run, and that I can receive a copy
-          of my results. No information will be passed to any other third
-          parties.
-        </p>
-        <form action="" [formGroup]="thirdFormGroup">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="optOut"
-              formControlName="optOut"
-            />
-            <label for="optOut">
-              Opt out of anonymised details being used for research purposes
-              (optional)
-            </label>
-          </div>
-        </form>
-        <div class="signature-area">
-          <label for="canvas">Signature</label>
-          <canvas #canvas id="canvas" [width]="canvasWidth" height="110"></canvas>
-
-          <div class="footer">
-            <div class="sign-date">Signed on: {{ today | date }}</div>
-            <div (click)="clearSign()" class="text-danger clear">Clear</div>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button
-            routerLink="patients"
-            class="btn btn-outline-primary btn-regular-outlined"
-          >
-            Cancel
-          </button>
-          <div>
-            <button
-              class="btn btn-outline-primary btn-regular-outlined"
-              matStepperPrevious
-            >
-              Back
-            </button>
-            <button class="btn btn-primary btn-regular" (click)="submit()">
-              Agree
-            </button>
-          </div>
-        </div>
-      </mat-step>
       <mat-step [stepControl]="firstFormGroup">
         <ng-template matStepLabel>Patient ID</ng-template>
         <h2 class="title">Patient ID</h2>
@@ -292,6 +184,119 @@
               (click)="goForward(stepper)"
             >
               Continue to Consent
+            </button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Consent</ng-template>
+        <h2 class="title">Consent</h2>
+
+        <div class="consent-leter">
+          <div class="content">
+            <p>Dear Patient:</p>
+
+            <p>
+              Thank you for choosing our practice for your optometry needs. This
+              document contains important information about the optometry test
+              you will be undergoing. We want you to fully understand the
+              process. Please carefully read all information presented and
+              contact us if you have any questions.
+            </p>
+            <p>
+              The purpose of the optometry test is to assess the current
+              functioning and health of your eyes. The eye test may include, but
+              is not limited to, an assessment of your visual acuity, color
+              vision, depth perception, refraction, and physical health. The
+              test may also check for signs of common eye disorders, such as
+              glaucoma, cataracts, and macular degeneration.
+            </p>
+            <p>
+              At the start of the test, you will be asked to complete a
+              questionnaire that provides us with general information about your
+              family medical history, medications, and lifestyle. After the
+              questionnaire is complete, a visual acuity test will be
+              administered. This may involve using an eye chart or hand-held
+              magnifying lens to evaluate your sight at various distances. Next,
+              the eye doctor may check for depth perception, color vision, and
+              eye alignment. If additional testing is required, the doctor may
+              perform refraction and/or retinoscopy to measure the amount of
+              near- and farsightedness.
+            </p>
+
+            <p>
+              In addition, the optometrist may also examine the overall health
+              of the eye, including corneal curvature, pupil dilation, and the
+              presence of any eye disease. Your eye pressure may be tested to
+              check for glaucoma. Finally, the doctor may evaluate your eyes
+              using ophthalmoscopy to check eye structures, such as the retina,
+              optic disk and macula.
+            </p>
+
+            <p>
+              If you have any questions or concerns about the optometry test or
+              any aspect of our practice, please contact us. We look forward to
+              helping you meet all of your optometry needs. Sincerely, Optometry
+              Practice
+            </p>
+          </div>
+        </div>
+        <p>
+          By signing below I acknowledge that I have received the Toku Inc.
+          BioAge Consent Form. I have been given the right to review such
+          consent form prior to signing this acknowledgement. I understand this
+          organization has the right to change this Consent Form from time to
+          time and that I may have to contact the organization to obtain a
+          current copy. I consent to my details being passed to Toku Inc. so
+          that the BioAge assessment can be run, and that I can receive a copy
+          of my results. No information will be passed to any other third
+          parties.
+        </p>
+        <form action="" [formGroup]="thirdFormGroup">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="optOut"
+              formControlName="optOut"
+            />
+            <label for="optOut">
+              Opt out of anonymised details being used for research purposes
+              (optional)
+            </label>
+          </div>
+        </form>
+        <div class="signature-area">
+          <label for="canvas">Signature</label>
+          <canvas
+            #canvas
+            id="canvas"
+            [width]="canvasWidth"
+            height="110"
+          ></canvas>
+
+          <div class="footer">
+            <div class="sign-date">Signed on: {{ today | date }}</div>
+            <div (click)="clearSign()" class="text-danger clear">Clear</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button
+            routerLink="/patients"
+            class="btn btn-outline-primary btn-regular-outlined"
+          >
+            Cancel
+          </button>
+          <div>
+            <button
+              class="btn btn-outline-primary btn-regular-outlined"
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button class="btn btn-primary btn-regular" (click)="submit()">
+              Agree
             </button>
           </div>
         </div>
