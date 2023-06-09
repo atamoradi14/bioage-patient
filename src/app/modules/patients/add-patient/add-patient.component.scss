@@ -63,6 +63,31 @@
       line-height: 22px;
     }
   }
+
+  .signature-area {
+    label {
+      font-size: 15px;
+    }
+    canvas {
+      display: block;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      .sign-date {
+        font-size: 13px;
+        font-style: italic;
+      }
+
+      .clear {
+        //margin-right: ;
+        font-size: 13px;
+        cursor: pointer;
+      }
+    }
+  }
 }
 .actions {
   margin-top: 2rem;

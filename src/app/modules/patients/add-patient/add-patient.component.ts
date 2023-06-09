@@ -1,5 +1,11 @@
 import { StepperOrientation } from '@angular/cdk/stepper';
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { atLeastOneCheckboxNeedToBeSelected } from '@shared/validators/custom-validators';
@@ -8,6 +14,7 @@ import { Observable, merge, of } from 'rxjs';
 import { CantContinueModalComponent } from './cant-continue-modal/cant-continue-modal.component';
 import { Router } from '@angular/router';
 import { FlowCompleteModalComponent } from './flow-complete-modal/flow-complete-modal.component';
+import SignaturePad from 'signature_pad';
 
 @Component({
   selector: 'app-add-patient',
@@ -16,6 +23,11 @@ import { FlowCompleteModalComponent } from './flow-complete-modal/flow-complete-
 })
 export class AddPatientComponent implements OnInit {
   bsModalRef!: BsModalRef;
+
+  @ViewChild('canvas', { static: true }) canvas!: ElementRef;
+  sig!: SignaturePad;
+  today = new Date();
+  canvasWidth = 590;
 
   firstFormGroup = this._formBuilder.group({
     patientId: ['ID58942', Validators.required],
@@ -45,8 +57,7 @@ export class AddPatientComponent implements OnInit {
   isLinear = false;
   deviceOrientation!: StepperOrientation;
 
-  isSaved = false;
-  isCantContinue = false;
+  isCanDeactive = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -63,15 +74,16 @@ export class AddPatientComponent implements OnInit {
 
     if (window.screen.orientation.type.includes('portrait')) {
       this.deviceOrientation = 'vertical';
+      this.canvasWidth = 590;
     } else {
       this.deviceOrientation = 'horizontal';
+      this.canvasWidth = 770;
     }
 
     console.log('orientationChanged');
   }
 
   ngOnInit(): void {
-    let arr: AbstractControl[] = [];
     this.secondFormGroup.addValidators(
       atLeastOneCheckboxNeedToBeSelected([
         this.secondFormGroup.get('isPragnent')!,
@@ -98,6 +110,7 @@ export class AddPatientComponent implements OnInit {
       this.secondFormGroup.controls.isNone.setValue(false);
     });
 
+    this.sig = new SignaturePad(this.canvas.nativeElement);
   }
 
   goForward(stepper: MatStepper) {
@@ -108,7 +121,7 @@ export class AddPatientComponent implements OnInit {
     }
 
     //open modal
-    this.isCantContinue = true;
+    this.isCanDeactive = true;
     this.bsModalRef = this.modalService.show(CantContinueModalComponent, {
       animated: true,
       class: 'cant-continue-modal-wrapper',
@@ -126,8 +139,9 @@ export class AddPatientComponent implements OnInit {
       this.router.navigate(['/patients']);
     }
   }
+
   canDeactivate(): Observable<boolean> {
-    if (!this.isSaved && !this.isCantContinue) {
+    if (!this.isCanDeactive) {
       const result = window.confirm('There are unsaved changes! Are you sure?');
       return of(result);
     }
@@ -135,7 +149,14 @@ export class AddPatientComponent implements OnInit {
     return of(true);
   }
 
-  submit(){
+  submit() {
+    if (this.sig.isEmpty()) {
+      return;
+    }
+
+    console.log(this.sig.toDataURL());
+
+    this.isCanDeactive = true;
     this.bsModalRef = this.modalService.show(FlowCompleteModalComponent, {
       animated: true,
       ignoreBackdropClick: true,
@@ -144,4 +165,7 @@ export class AddPatientComponent implements OnInit {
     });
   }
 
+  clearSign() {
+    this.sig.clear();
+  }
 }
