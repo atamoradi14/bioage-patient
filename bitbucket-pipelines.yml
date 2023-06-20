@@ -1,0 +1,115 @@
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+#
+
+definitions:
+  services:
+    docker:
+      memory: 512
+    docker-with-more-memory:
+      memory: 2048
+      type: docker
+    docker-with-large-memory:
+      memory: 8192
+      type: docker
+  steps:
+    - step: &TagTest
+        name: Run TagTest
+        image: atlassian/default-image:3
+        runs-on: 
+            - self.hosted
+            - linux
+        script: 
+            - set
+            - git fetch --tags
+            - git tag -m "Tagging for release ${TokuVersion}" -a release-${TokuVersion}  # set the tag ensure if unique
+    - step: &Tag-step
+        name: Tag Step
+        image: atlassian/default-image:3
+        runs-on: 
+            - self.hosted
+            - linux
+        script: 
+            - git tag -m "Tagging for release ${TokuVersion}" -a release-${TokuVersion}  # set the tag ensure if unique
+            - git push origin release-${TokuVersion} --no-verify  # push the tag once all the upload have taken place   
+    - step: &build-step
+        size: 8x
+        name: SonarQube analysis
+        image: node:16.18.0
+        services: [docker-with-large-memory]
+        runs-on: 
+          - self.hosted
+          - linux
+        caches:
+          - depend
+        script:
+          - apt-get update
+          - apt-get install --yes openjdk-11-jre zip
+          - npm install
+          - wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.2.1/dependency-check-7.2.1-release.zip -P /tmp
+          - unzip /tmp/dependency-check-7.2.1-release.zip -d /tmp/
+          #- /tmp/dependency-check/bin/dependency-check.sh -f JSON -f HTML --data ~/.depend --scan .
+          - pipe: sonarsource/sonarqube-scan:1.0.0
+            variables:
+              SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
+              SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+              EXTRA_ARGS: -Dsonar.projectVersion=0.0.$BITBUCKET_BUILD_NUMBER
+        artifacts:
+          - dependency-check-report.json       
+          - dependency-check-report.html
+
+  caches:
+    sonar: ~/.sonar
+    depend: ~/.depend
+                          
+
+pipelines:
+  custom:
+    FullRelease:
+      - variables:          #list variable names under here
+        - name: TokuVersion
+      - step:
+          size: 8x
+          name: Build and Test
+          services: [docker-with-large-memory]
+          clone:
+            lfs: true
+          runs-on: 
+            - self.hosted
+            - linux
+          script: 
+            - set   
+            - docker build -t bioage/bioageui -t bioage/bioageui:${TokuVersion} -f ./Dockerfile --build-arg BUILD_TERELEASE=${TokuVersion} .
+            - pipe: atlassian/aws-ecr-push-image:1.5.0
+              variables:
+                AWS_ACCESS_KEY_ID: $BB_AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $BB_AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $BB_AWS_DEFAULT_REGION
+                IMAGE_NAME: bioage/bioageui
+                TAGS: '${TokuVersion}'
+          caches:
+            - docker # adds docker layer caching
+      - step: *Tag-step
+  pull-requests:
+    '**':
+      - step: *build-step
+  branches:
+   '{master}':
+    - step: *build-step
+    - step:
+        size: 8x
+        name: Build
+        services: [docker-with-large-memory]
+        clone:
+          lfs: true
+        runs-on: 
+          - self.hosted
+          - linux
+        script: 
+          - set
+          - docker build -t bioage/bioageui  -f ./Dockerfile --build-arg BUILD_TERELEASE=1.2.3 .
+        caches:
+            - docker # adds docker layer caching
+
+ 

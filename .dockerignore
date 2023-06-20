@@ -1,0 +1,12 @@
+Dockerfile
+docker-compose.yml
+.dockerignore
+README.md
+.git
+bitbucket-pipelines.yaml
+.vscode
+node_modules
+.angular
+tmp
+spec
+log
